@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/category.dart';
 import '../theme.dart';
 import '../widgets/common.dart';
@@ -16,7 +17,7 @@ class QuizConfigScreen extends StatefulWidget {
 class _QuizConfigScreenState extends State<QuizConfigScreen> {
   double _amount = 25; // 1–50 (OpenTDB max per request)
   String _difficulty = 'any';
-  String _type = 'multiple';
+  String _type = 'any';
 
   static const _difficulties = {
     'any': 'Any Difficulty',
@@ -35,8 +36,8 @@ class _QuizConfigScreenState extends State<QuizConfigScreen> {
         child: Text(text, style: outfit(16, weight: FontWeight.w700)),
       );
 
-  Widget _dropdown(String value, Map<String, String> items,
-      ValueChanged<String> onChanged) {
+  Widget _dropdown(
+      String value, Map<String, String> items, ValueChanged<String> onChanged) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14),
       decoration: BoxDecoration(
@@ -88,7 +89,8 @@ class _QuizConfigScreenState extends State<QuizConfigScreen> {
             const SizedBox(height: 12),
             Center(
               child: Text('Quizzical',
-                  style: outfit(32, weight: FontWeight.w800, color: AppColors.ink)),
+                  style: outfit(32,
+                      weight: FontWeight.w800, color: AppColors.ink)),
             ),
             Center(
               child: Text('Configuration',
@@ -103,9 +105,11 @@ class _QuizConfigScreenState extends State<QuizConfigScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Select 1-50',
-                    style: outfit(11, weight: FontWeight.w400, color: AppColors.muted)),
+                    style: outfit(11,
+                        weight: FontWeight.w400, color: AppColors.muted)),
                 Text('${_amount.round()}',
-                    style: outfit(12, weight: FontWeight.w700, color: AppColors.slider)),
+                    style: outfit(12,
+                        weight: FontWeight.w700, color: AppColors.slider)),
               ],
             ),
             SliderTheme(

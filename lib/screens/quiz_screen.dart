@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/category.dart';
 import '../models/question.dart';
 import '../services/api_service.dart';
@@ -128,7 +129,12 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_loading) {
       body = const LoadingView(message: 'Loading questions…');
     } else if (_error != null) {
-      body = ErrorView(message: _error!, onRetry: _load);
+      body = ErrorView(
+        message: _error!,
+        onRetry: _load,
+        secondaryActionLabel: 'CHANGE SETTINGS',
+        onSecondaryAction: () => Navigator.pop(context),
+      );
     } else {
       final q = _questions[_index];
       final isLast = _index == _questions.length - 1;

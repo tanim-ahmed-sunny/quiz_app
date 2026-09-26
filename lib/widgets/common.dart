@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../theme.dart';
 
 enum ButtonKind { teal, dark, outlined }
@@ -31,8 +32,12 @@ class AppButton extends StatelessWidget {
             side: const BorderSide(color: AppColors.deepTeal, width: 1.5),
             shape: shape,
           ),
-          child: Text(label,
-              style: outfit(18, weight: FontWeight.w700, color: AppColors.deepTeal)),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style:
+                outfit(18, weight: FontWeight.w700, color: AppColors.deepTeal),
+          ),
         ),
       );
     }
@@ -48,8 +53,11 @@ class AppButton extends StatelessWidget {
           disabledBackgroundColor: bg.withAlpha(90),
           shape: shape,
         ),
-        child: Text(label,
-            style: outfit(17, weight: FontWeight.w700, color: Colors.white)),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: outfit(17, weight: FontWeight.w700, color: Colors.white),
+        ),
       ),
     );
   }
@@ -77,7 +85,15 @@ class LoadingView extends StatelessWidget {
 class ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
-  const ErrorView({super.key, required this.message, required this.onRetry});
+  final String? secondaryActionLabel;
+  final VoidCallback? onSecondaryAction;
+  const ErrorView({
+    super.key,
+    required this.message,
+    required this.onRetry,
+    this.secondaryActionLabel,
+    this.onSecondaryAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +113,17 @@ class ErrorView extends StatelessWidget {
             SizedBox(
                 width: 180,
                 child: AppButton(label: 'TRY AGAIN', onPressed: onRetry)),
+            if (secondaryActionLabel != null && onSecondaryAction != null) ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                width: 180,
+                child: AppButton(
+                  label: secondaryActionLabel!,
+                  kind: ButtonKind.outlined,
+                  onPressed: onSecondaryAction,
+                ),
+              ),
+            ],
           ],
         ),
       ),
